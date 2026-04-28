@@ -133,14 +133,15 @@
     content: '';
     position: absolute;
     bottom: 0;
-    width: 7px;
-    height: 11px;
-    background-size: 7px 11px;
+    width: 9px;
+    height: 6px;
+    background-size: 9px 6px;
     background-repeat: no-repeat;
     pointer-events: none;
   }
-  .bubble.received::after { left: -6px; background-image: url('tail-received.png'); }
-  .bubble.sent::after     { right: -6px; background-image: url('tail-sent.png'); }
+  .bubble.received::after { left: -8px; background-image: url('tail-received.png'); }
+  .bubble.sent::after     { right: -8px; background-image: url('tail-sent.png'); }
+  .bubble.typing::after   { display: none; }
 
   /* Inline rich text */
   .bubble.text strong { font-weight: 600; color: inherit; }
