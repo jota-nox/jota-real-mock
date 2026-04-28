@@ -236,15 +236,16 @@
   .bubble.typing { width: 13%; max-width: 13%; }
   .bubble.typing img { width: 100%; display: block; }
 
-  /* Photo bubble — image with sent green border, no caption */
+  /* Photo/image bubble — image with bubble background border around it */
   .bubble.photo {
-    background: #d9fdd3;
     padding: 3px;
     border-radius: 9px;
     width: 66%;
     max-width: 66%;
     position: relative;
   }
+  .bubble.photo.sent     { background: #d9fdd3; }
+  .bubble.photo.received { background: #ffffff; }
   .bubble.photo img {
     width: 100%;
     display: block;
@@ -267,6 +268,31 @@
     width: 14px;
     height: 9px;
     fill: rgba(255, 255, 255, 0.9);
+  }
+  /* Image bubble for chart/document — wider, no overlay, light bg for received */
+  .bubble.image {
+    padding: 3px;
+    border-radius: 9px;
+    width: 75%;
+    max-width: 75%;
+    position: relative;
+  }
+  .bubble.image.received { background: #ffffff; }
+  .bubble.image.sent     { background: #d9fdd3; }
+  .bubble.image img {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+  }
+  .bubble.image .meta {
+    position: absolute;
+    bottom: 6px;
+    right: 9px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1px 5px;
+    border-radius: 4px;
+    transform: none;
+    margin: 0;
   }
 
   .header {
@@ -405,7 +431,10 @@
 <div class="controls" id="controls">
   <button onclick="toggleKeyboard()">Teclado</button>
   <button onclick="playTela2()">Tela 2</button>
-  <button onclick="resetChat()">Reset chat</button>
+  <button onclick="playTela3()">Tela 3</button>
+  <button onclick="playTela4()">Tela 4</button>
+  <button onclick="playAll()">Roteiro</button>
+  <button onclick="resetChat()">Reset</button>
   <button onclick="toggleControls()">Esconder</button>
 </div>
 
@@ -518,15 +547,23 @@
   window.addEventListener('touchend', () => { stopRec(); afterRecRelease(); });
   window.addEventListener('touchcancel', stopRec);
 
-  // ?autoplay=tela1 / tela2 / both — renders the scene without user interaction.
-  // Useful for headless screenshot/diff.
+  // Plays Roteiro 1 end-to-end with realistic pauses between scenes.
+  function playAll() {
+    resetChat();
+    setTimeout(() => playTela1(),  300);
+    setTimeout(() => playTela2(),  9000);
+    setTimeout(() => playTela3(), 18000);
+    setTimeout(() => playTela4(), 26000);
+  }
+
+  // ?autoplay=tela1|tela2|tela3|tela4|all — renders the scene(s) without user interaction.
   function applyAutoplay() {
     const p = new URLSearchParams(location.search).get('autoplay');
     if (!p) return;
     setTimeout(() => phone.classList.add('keyboard-open'), 100);
-    if (p === 'tela1' || p === 'both') setTimeout(() => playTela1(), 300);
-    if (p === 'tela2') setTimeout(() => playTela2(), 300);
-    if (p === 'both') setTimeout(() => playTela2(), 6500);
+    const map = { tela1: playTela1, tela2: playTela2, tela3: playTela3, tela4: playTela4 };
+    if (map[p]) setTimeout(map[p], 300);
+    if (p === 'all') setTimeout(playAll, 300);
     if (new URLSearchParams(location.search).get('hidedev')) controls.classList.add('hidden');
   }
 
@@ -636,6 +673,14 @@
     applyLead(b);
     return b;
   }
+  function imageBubble(src, kind = 'received', opts = {}) {
+    const b = appendBubble(
+      `<img src="${src}" alt=""><span class="meta">${nowHHMM()}</span>`,
+      `${kind} image`
+    );
+    applyLead(b);
+    return b;
+  }
   function datePill(label = 'Hoje') {
     const div = document.createElement('div');
     div.className = 'date-pill';
@@ -661,20 +706,28 @@
   }
 
   // Scene state — tracks which scenes have already played to avoid retrigger.
-  const sceneState = { tela1Played: false, tela2Played: false };
+  const sceneState = {
+    tela1Played: false,
+    tela2Played: false,
+    tela3Played: false,
+    tela4Played: false,
+  };
 
   function afterRecRelease() {
-    // Only trigger Tela 1 once, and only if recording was substantial (>500ms).
-    if (sceneState.tela1Played) return;
+    // Hold-mic releases trigger the next un-played audio scene in order (1 then 3).
     if (lastRecDurationMs < 500) return;
-    sceneState.tela1Played = true;
-    playTela1();
+    if (!sceneState.tela1Played) {
+      sceneState.tela1Played = true;
+      playTela1();
+    } else if (!sceneState.tela3Played) {
+      sceneState.tela3Played = true;
+      playTela3();
+    }
   }
 
   function resetChat() {
     messagesEl.innerHTML = '';
-    sceneState.tela1Played = false;
-    sceneState.tela2Played = false;
+    Object.keys(sceneState).forEach(k => sceneState[k] = false);
   }
 
   // ────────────────────────────────────────────────────────────
@@ -731,6 +784,49 @@
         }, 2200);
       }, 1800);
     }, 400);
+  }
+
+  // Tela 3: áudio Carla salário (registro direto, sem regra)
+  function playTela3() {
+    if (sceneState.tela3Played) return;
+    sceneState.tela3Played = true;
+    ensureDatePill();
+
+    setTimeout(() => {
+      const audio = audioBubble();
+      const img = audio.querySelector('img');
+      setTimeout(() => { img.src = 'audio-sending.png'; }, 700);
+      setTimeout(() => { img.src = 'audio-sent.png'; }, 1700);
+
+      setTimeout(() => {
+        const typing = typingBubble();
+        setTimeout(() => {
+          typing.remove();
+          textBubble(
+            '✅ Saída: *R$ 1.900* · Folha de pagamento · registrado',
+            'received'
+          );
+        }, 2200);
+      }, 2000);
+    }, 250);
+  }
+
+  // Tela 4: relatório por categoria com chart
+  function playTela4() {
+    if (sceneState.tela4Played) return;
+    sceneState.tela4Played = true;
+    ensureDatePill();
+
+    setTimeout(() => {
+      textBubble('Jota, como ficou o mês por categoria?', 'sent', { check: 'read' });
+      setTimeout(() => {
+        const typing = typingBubble();
+        setTimeout(() => {
+          typing.remove();
+          imageBubble('chart-categorias.png', 'received');
+        }, 2400);
+      }, 1500);
+    }, 250);
   }
 
   applyAutoplay();

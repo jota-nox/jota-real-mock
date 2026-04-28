@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Chart Test — Distribuição de gastos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: transparent;
+    width: 600px; height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  }
+
+  .card {
+    width: 600px;
+    height: 600px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.06);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .header {
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  .header .title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+  .header .subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    color: #9a9a9a;
+    margin-top: 2px;
+  }
+  .smile {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .chart-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 12px 0;
+  }
+
+  .donut {
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+  }
+
+  .legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 13px;
+  }
+  .legend-row {
+    display: grid;
+    grid-template-columns: 14px 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    color: #1a1a1a;
+  }
+  .legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .legend-label {
+    font-weight: 400;
+  }
+  .legend-value {
+    color: #1a1a1a;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .legend-pct {
+    color: #9a9a9a;
+    font-variant-numeric: tabular-nums;
+    width: 32px;
+    text-align: right;
+  }
+
+  .footer {
+    height: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #c4bfb6;
+    font-size: 11px;
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <div>
+      <div class="title">Distribuição de gastos</div>
+      <div class="subtitle">Abril 2026</div>
+    </div>
+    <svg class="smile" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#FFE84C"/>
+      <path d="M11 18 Q18 25 25 18" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="chart-area">
+    <svg class="donut" viewBox="0 0 100 100">
+      <!-- Donut segments. Using stroke-dasharray on circles. Circumference = 2π × 35 ≈ 219.91 -->
+      <!-- Total: 11205. Insumos 4180 (37.3%), Folha 3250 (29.0%), Aluguel 1800 (16.1%),
+           Energia 920 (8.2%), Transporte 540 (4.8%), Alimentação 285 (2.5%), Outros 230 (2.1%) -->
+      <g transform="rotate(-90 50 50)">
+        <!-- Insumos: 37.3% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#F9DA4A" stroke-width="20"
+                stroke-dasharray="82.03 137.88" stroke-dashoffset="0"/>
+        <!-- Folha: 29.0% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#F96B5C" stroke-width="20"
+                stroke-dasharray="63.78 156.13" stroke-dashoffset="-82.03"/>
+        <!-- Aluguel: 16.1% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#B5A2F8" stroke-width="20"
+                stroke-dasharray="35.40 184.51" stroke-dashoffset="-145.81"/>
+        <!-- Energia: 8.2% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#F4A14D" stroke-width="20"
+                stroke-dasharray="18.04 201.87" stroke-dashoffset="-181.21"/>
+        <!-- Transporte: 4.8% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#85B6E5" stroke-width="20"
+                stroke-dasharray="10.56 209.35" stroke-dashoffset="-199.25"/>
+        <!-- Alimentação: 2.5% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#88E0B5" stroke-width="20"
+                stroke-dasharray="5.59 214.32" stroke-dashoffset="-209.81"/>
+        <!-- Outros: 2.1% -->
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#E2DDD0" stroke-width="20"
+                stroke-dasharray="4.51 215.40" stroke-dashoffset="-215.40"/>
+      </g>
+    </svg>
+
+    <div class="legend">
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#F9DA4A"></span>
+        <span class="legend-label">Insumos</span>
+        <span class="legend-value">R$ 4.180</span>
+        <span class="legend-pct">37%</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#F96B5C"></span>
+        <span class="legend-label">Folha de pagamento</span>
+        <span class="legend-value">R$ 3.250</span>
+        <span class="legend-pct">29%</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#B5A2F8"></span>
+        <span class="legend-label">Aluguel</span>
+        <span class="legend-value">R$ 1.800</span>
+        <span class="legend-pct">16%</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#F4A14D"></span>
+        <span class="legend-label">Energia</span>
+        <span class="legend-value">R$ 920</span>
+        <span class="legend-pct">8%</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#85B6E5"></span>
+        <span class="legend-label">Transporte</span>
+        <span class="legend-value">R$ 540</span>
+        <span class="legend-pct">5%</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#88E0B5"></span>
+        <span class="legend-label">Alimentação</span>
+        <span class="legend-value">R$ 285</span>
+        <span class="legend-pct">3%</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-swatch" style="background:#E2DDD0"></span>
+        <span class="legend-label">Outros</span>
+        <span class="legend-value">R$ 230</span>
+        <span class="legend-pct">2%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">www.jota.ai</div>
+</div>
+
+</body>
+</html>
