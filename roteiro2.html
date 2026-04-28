@@ -140,6 +140,13 @@
   .bubble.is-lead .tail-svg { display: block; }
   .bubble.received .tail-svg { left: -7px; }
   .bubble.sent     .tail-svg { right: -7px; }
+  /* Squash bottom corner where tail emerges, so tail flows naturally from bubble */
+  .bubble.received.is-lead.text { border-bottom-left-radius: 0; }
+  .bubble.sent.is-lead.text     { border-bottom-right-radius: 0; }
+  .bubble.received.is-lead.photo, .bubble.received.is-lead.image { border-bottom-left-radius: 0; }
+  .bubble.sent.is-lead.photo,     .bubble.sent.is-lead.image     { border-bottom-right-radius: 0; }
+  .bubble.received.is-lead.photo img, .bubble.received.is-lead.image img { border-bottom-left-radius: 0; }
+  .bubble.sent.is-lead.photo img,     .bubble.sent.is-lead.image img     { border-bottom-right-radius: 0; }
 
   /* Inline rich text */
   .bubble.text strong { font-weight: 600; color: inherit; }
@@ -634,8 +641,8 @@
   const CHECK_SINGLE_GRAY = `<svg class="check" viewBox="0 0 16 11" fill="none"><path d="M12.07 0.65L5.37 7.4 2.18 4.21l-.92.91 4.11 4.13 7.62-7.6z" fill="#8696a0"/></svg>`;
 
   // Tail SVGs (bottom corner) — convex iOS-style
-  const TAIL_RECEIVED = `<svg class="tail-svg" viewBox="0 0 18 36" preserveAspectRatio="none"><path d="M18,0 L18,36 C10,34 4,28 0,18 C8,18 14,12 18,0 Z" fill="#ffffff"/></svg>`;
-  const TAIL_SENT     = `<svg class="tail-svg" viewBox="0 0 18 36" preserveAspectRatio="none"><path d="M0,0 L0,36 C8,34 14,28 18,18 C10,18 4,12 0,0 Z" fill="#d9fdd3"/></svg>`;
+  const TAIL_RECEIVED = `<svg class="tail-svg" viewBox="0 0 18 36" preserveAspectRatio="none"><path d="M18,0 L18,36 L8,36 C3,36 0,32 0,28 C0,16 9,8 18,0 Z" fill="#ffffff"/></svg>`;
+  const TAIL_SENT     = `<svg class="tail-svg" viewBox="0 0 18 36" preserveAspectRatio="none"><path d="M0,0 L0,36 L10,36 C15,36 18,32 18,28 C18,16 9,8 0,0 Z" fill="#d9fdd3"/></svg>`;
 
   // Quote icons (SF Symbol-style)
   const ICON_MIC    = `<svg class="quote-icon" viewBox="0 0 16 16"><path d="M8 1a2.5 2.5 0 0 0-2.5 2.5v5a2.5 2.5 0 0 0 5 0v-5A2.5 2.5 0 0 0 8 1zM4.5 7v1.5a3.5 3.5 0 0 0 7 0V7h1v1.5a4.5 4.5 0 0 1-4 4.475V14.5h2.5v1h-6v-1H7.5v-1.525a4.5 4.5 0 0 1-4-4.475V7h1z"/></svg>`;
