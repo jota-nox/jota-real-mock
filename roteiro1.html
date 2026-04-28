@@ -125,15 +125,11 @@
     line-height: 1.32;
     color: #0c0c0c;
     -webkit-font-smoothing: antialiased;
-    background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
-  .bubble.text.sent {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M17.0001 0C7.61122 0 0 7.61116 0 17V101C0 110.389 7.61122 118 17.0001 118H482C486.565 118 490.71 116.2 493.764 113.271C495.381 114.834 499.96 117.5 507.5 117.5C508.167 117.5 508.8 116.8 506 114C503.2 111.2 501.167 106.833 500.5 105C500.167 104 499 100.5 499 95V17C499 7.61116 491.389 0 482 0H17.0001Z' fill='%23D4FCCD'/></svg>");
-  }
-  .bubble.text.received {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M491.071 0C500.46 0 508.071 7.61116 508.071 17V101C508.071 110.389 500.46 118 491.071 118H26.0713C21.506 118 17.3616 116.2 14.3076 113.271C12.69 114.834 8.11181 117.5 0.571289 117.5C-0.0953776 117.5 -0.728711 116.8 2.07129 114C4.87127 111.2 6.9046 106.833 7.57129 105C7.90462 104 9.07129 100.5 9.07129 95V17C9.07129 7.61116 16.6824 0 26.0713 0H491.071Z' fill='white'/></svg>");
-  }
+  .bubble.sent.text     { padding-right: 16px; }
+  .bubble.received.text { padding-left: 16px; }
 
   /* Tail — cropped from real WA iOS screenshots (wa-refs/IMG_3649.PNG)
      with cream BG color-keyed to alpha. Aplicado em TODA bolha (text, photo,
@@ -230,14 +226,7 @@
   }
 
   /* Image-asset bubbles (audio, typing) — asset already includes its bg */
-  .bubble.audio {
-    width: 78%;
-    max-width: 78%;
-    padding-right: 14px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M17.0001 0C7.61122 0 0 7.61116 0 17V101C0 110.389 7.61122 118 17.0001 118H482C486.565 118 490.71 116.2 493.764 113.271C495.381 114.834 499.96 117.5 507.5 117.5C508.167 117.5 508.8 116.8 506 114C503.2 111.2 501.167 106.833 500.5 105C500.167 104 499 100.5 499 95V17C499 7.61116 491.389 0 482 0H17.0001Z' fill='%23D4FCCD'/></svg>");
-  }
+  .bubble.audio { width: 78%; max-width: 78%; padding-right: 14px; /* SVG bg applied via JS */ }
   .bubble.audio img { width: 100%; display: block; }
 
   .bubble.typing { width: 13%; max-width: 13%; }
@@ -252,13 +241,8 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
-  .bubble.photo.sent {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M17.0001 0C7.61122 0 0 7.61116 0 17V101C0 110.389 7.61122 118 17.0001 118H482C486.565 118 490.71 116.2 493.764 113.271C495.381 114.834 499.96 117.5 507.5 117.5C508.167 117.5 508.8 116.8 506 114C503.2 111.2 501.167 106.833 500.5 105C500.167 104 499 100.5 499 95V17C499 7.61116 491.389 0 482 0H17.0001Z' fill='%23D4FCCD'/></svg>");
-  }
-  .bubble.photo.received {
-    padding: 5px 5px 6px 16px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M491.071 0C500.46 0 508.071 7.61116 508.071 17V101C508.071 110.389 500.46 118 491.071 118H26.0713C21.506 118 17.3616 116.2 14.3076 113.271C12.69 114.834 8.11181 117.5 0.571289 117.5C-0.0953776 117.5 -0.728711 116.8 2.07129 114C4.87127 111.2 6.9046 106.833 7.57129 105C7.90462 104 9.07129 100.5 9.07129 95V17C9.07129 7.61116 16.6824 0 26.0713 0H491.071Z' fill='white'/></svg>");
-  }
+  .bubble.photo.sent { /* SVG bg applied via JS */ }
+  .bubble.photo.received { padding: 5px 5px 6px 16px; /* SVG bg applied via JS */ }
   .bubble.photo img {
     width: 100%;
     display: block;
@@ -291,14 +275,8 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
-  .bubble.image.sent {
-    padding-right: 16px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M17.0001 0C7.61122 0 0 7.61116 0 17V101C0 110.389 7.61122 118 17.0001 118H482C486.565 118 490.71 116.2 493.764 113.271C495.381 114.834 499.96 117.5 507.5 117.5C508.167 117.5 508.8 116.8 506 114C503.2 111.2 501.167 106.833 500.5 105C500.167 104 499 100.5 499 95V17C499 7.61116 491.389 0 482 0H17.0001Z' fill='%23D4FCCD'/></svg>");
-  }
-  .bubble.image.received {
-    padding-left: 16px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 509 118' preserveAspectRatio='none'><path d='M491.071 0C500.46 0 508.071 7.61116 508.071 17V101C508.071 110.389 500.46 118 491.071 118H26.0713C21.506 118 17.3616 116.2 14.3076 113.271C12.69 114.834 8.11181 117.5 0.571289 117.5C-0.0953776 117.5 -0.728711 116.8 2.07129 114C4.87127 111.2 6.9046 106.833 7.57129 105C7.90462 104 9.07129 100.5 9.07129 95V17C9.07129 7.61116 16.6824 0 26.0713 0H491.071Z' fill='white'/></svg>");
-  }
+  .bubble.image.sent { padding-right: 16px; /* SVG bg applied via JS */ }
+  .bubble.image.received { padding-left: 16px; /* SVG bg applied via JS */ }
   .bubble.image img {
     width: 100%;
     display: block;
@@ -634,12 +612,55 @@
     tick();
   }
 
+  // Generate dynamic SVG path for bubble shape — fixed-size tail, no distortion.
+  const BUBBLE_RADIUS = 9, TAIL_W = 8, TAIL_H = 13;
+  function bubbleSVG(w, h, isSent) {
+    const r = BUBBLE_RADIUS, t = TAIL_W, th = TAIL_H;
+    const fill = isSent ? '%23D4FCCD' : 'white';
+    const totalW = w + t;
+    let path;
+    if (isSent) {
+      path = 'M' + r + ' 0 H' + (w-r) + ' Q' + w + ' 0 ' + w + ' ' + r + ' V' + (h-th) +
+             ' C' + w + ' ' + (h-3) + ' ' + (w+t-2) + ' ' + (h-1) + ' ' + (w+t) + ' ' + (h-1) +
+             ' Q' + (w+t+1) + ' ' + h + ' ' + (w+t-3) + ' ' + (h-2) +
+             ' C' + (w-1) + ' ' + (h-2) + ' ' + (w-2) + ' ' + (h-3) + ' ' + (w-2) + ' ' + h +
+             ' H' + r + ' Q0 ' + h + ' 0 ' + (h-r) + ' V' + r + ' Q0 0 ' + r + ' 0 Z';
+    } else {
+      path = 'M' + (t+r) + ' 0 H' + (t+w-r) + ' Q' + (t+w) + ' 0 ' + (t+w) + ' ' + r + ' V' + (h-r) +
+             ' Q' + (t+w) + ' ' + h + ' ' + (t+w-r) + ' ' + h + ' H' + (t+r) +
+             ' C' + (t+2) + ' ' + h + ' ' + (t+1) + ' ' + (h-2) + ' ' + (t+2) + ' ' + (h-3) +
+             ' Q-1 ' + h + ' 0 ' + (h-1) +
+             ' C0 ' + (h-1) + ' ' + (t-2) + ' ' + (h-3) + ' ' + t + ' ' + (h-th) +
+             ' V' + r + ' Q' + t + ' 0 ' + (t+r) + ' 0 Z';
+    }
+    const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + totalW + "' height='" + h +
+                "' viewBox='0 0 " + totalW + " " + h + "'><path d='" + path + "' fill='" + fill + "'/></svg>";
+    return 'url("data:image/svg+xml;utf8,' + svg + '")';
+  }
+
+  function applyBubbleShape(bubble) {
+    if (bubble.classList.contains('typing')) return; // no tail on typing indicator
+    requestAnimationFrame(() => {
+      const r = bubble.getBoundingClientRect();
+      const w = Math.round(r.width);
+      const h = Math.round(r.height);
+      if (w === 0 || h === 0) return;
+      const isSent = bubble.classList.contains('sent');
+      bubble.style.backgroundImage = bubbleSVG(w, h, isSent);
+      bubble.style.backgroundSize = '100% 100%';
+      bubble.style.backgroundRepeat = 'no-repeat';
+    });
+  }
+
   function appendBubble(html, classes) {
     const div = document.createElement('div');
     div.className = `bubble ${classes}`;
     div.innerHTML = html;
     messagesEl.appendChild(div);
-    requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
+    requestAnimationFrame(() => {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      applyBubbleShape(div);
+    });
     return div;
   }
 
