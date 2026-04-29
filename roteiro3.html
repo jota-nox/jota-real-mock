@@ -223,13 +223,14 @@
   }
 
   /* Image-asset bubbles (audio, typing) — asset already includes its bg */
-  /* Audio: 2 PNGs empilhados. Elementos full-width; timestamps em escala natural
-     (660/930=71%, mas reduzido a 65% pra bater com o range CERTO 32.8%-94.9% do bubble). */
-  .bubble.audio { width: 78%; max-width: 78%; padding: 6px 9px; /* SVG bg applied via JS */ }
+  /* Audio: 2 PNGs empilhados. Padding calibrado contra Figma do Felippo
+     (canvas 660: padding 16/35/9/15 → real ~0.55× = 9/19/5/8). Wave 100% inner.
+     Timestamps width 65% align-left 35% pra "06:49" terminar perto do fim do wave. */
+  .bubble.audio { width: 78%; max-width: 78%; padding: 9px 19px 5px 8px; /* SVG bg via JS */ }
   .bubble.audio .audio-stack { display: flex; flex-direction: column; gap: 0; }
   .bubble.audio .audio-stack img { display: block; }
   .bubble.audio .audio-stack .audio-elements { width: 100%; }
-  .bubble.audio .audio-stack .audio-times { width: 65%; margin-left: 32%; }
+  .bubble.audio .audio-stack .audio-times { width: 65%; margin-left: 35%; }
 
   .bubble.typing { width: 13%; max-width: 13%; }
   .bubble.typing img { width: 100%; display: block; }
