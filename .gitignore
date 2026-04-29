@@ -1,5 +1,4 @@
-.DS_Store
-__MACOSX/
-*.swp
-*.tmp
-.vercel
+tmp/
+bubble/
+bubble-clean/
+*.bak

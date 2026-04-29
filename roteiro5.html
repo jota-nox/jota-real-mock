@@ -222,16 +222,20 @@
   }
 
   /* Image-asset bubbles (audio, typing) — asset already includes its bg */
-  .bubble.audio { width: 78%; max-width: 78%; padding: 10px 16px 8px 10px; /* SVG bg applied via JS */ }
-  .bubble.audio .audio-stack { display: flex; flex-direction: column; gap: 4px; }
-  .bubble.audio .audio-stack img { width: 100%; display: block; }
+  /* Audio: 2 PNGs empilhados. Elementos full-width; timestamps em escala natural
+     (660/930=71%, mas reduzido a 65% pra bater com o range CERTO 32.8%-94.9% do bubble). */
+  .bubble.audio { width: 78%; max-width: 78%; padding: 6px 9px; /* SVG bg applied via JS */ }
+  .bubble.audio .audio-stack { display: flex; flex-direction: column; gap: 0; }
+  .bubble.audio .audio-stack img { display: block; }
+  .bubble.audio .audio-stack .audio-elements { width: 100%; }
+  .bubble.audio .audio-stack .audio-times { width: 65%; margin-left: 32%; }
 
   .bubble.typing { width: 13%; max-width: 13%; }
   .bubble.typing img { width: 100%; display: block; }
 
   /* Photo/image bubble — image with bubble background border around it */
   .bubble.photo {
-    padding: 5px 16px 6px 5px;
+    padding: 3px 11px 3px 3px;
     width: 66%;
     max-width: 66%;
     position: relative;
